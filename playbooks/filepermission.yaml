@@ -1,0 +1,14 @@
+---
+- name: Change file permissions
+  hosts: all
+
+  tasks:
+  - name: Change File Ownership with Permissions & Create the file if it doesn't exist & also make sure the task is idempotent
+    file:
+      path: /home/asaxena/linux2
+      state: touch
+      mode: a+w
+      owner: asaxena
+      group: asaxena
+      modification_time: preserve
+      access_time: preserve

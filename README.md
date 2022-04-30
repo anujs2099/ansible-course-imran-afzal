@@ -53,6 +53,7 @@ ansible all -a "uptime"
 cat /etc/ansible/ansible.cfg | grep deprecation_warning
 	deprecation_warnings = False
 
-
-
+# Install additional Ansible collection for firewalld
+Note: This is not needed on rhel8
+ansible-galaxy collection install ansible.posix
 
