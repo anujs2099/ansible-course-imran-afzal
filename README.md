@@ -1,5 +1,7 @@
 # Course: https://www.udemy.com/course/complete-ansible-devops-automation-training/
 
+# Note: all ansible, ansible-doc, ansible-playbook commands are performed on control vm
+
 # ansible-playbook syntax check
 ansible-playbook --syntax-check helloworld.yaml
 
@@ -41,4 +43,16 @@ ssh 10.253.1.18
 ssh 10.253.1.20
 	exit
 
-# 
+# test inventory file
+ansible all -m ping
+
+# run ad-hoc commands on remote vms
+ansible all -a "uptime"
+
+# disable the deprecation warnings
+cat /etc/ansible/ansible.cfg | grep deprecation_warning
+	deprecation_warnings = False
+
+
+
+
