@@ -1,0 +1,15 @@
+---
+- name: Playbook for shell script
+  hosts: all
+
+  tasks:
+  - name: Copy shell script to remote vms
+    copy:
+      src: cfile.sh
+      dest: /home/asaxena/cfile.sh
+      owner: asaxena
+      group: asaxena
+      mode: '744'
+
+  - name: Run shell script (not idempotent)
+    shell: /home/asaxena/cfile.sh
