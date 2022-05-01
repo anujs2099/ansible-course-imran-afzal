@@ -2,6 +2,9 @@
 
 # Note: all ansible, ansible-doc, ansible-playbook commands are performed on control vm
 
+# check the directory structure
+tree
+
 # ansible-playbook syntax check
 ansible-playbook --syntax-check helloworld.yaml
 
@@ -54,7 +57,24 @@ ssh 10.253.1.20
 ansible all -m ping
 
 # run ad-hoc commands on remote vms
-ansible all -a "uptime"
+ansible all -m shell -a "uptime"
+ansible [target] -m [module] -a "[module options]"
+ansible localhost -m ping
+ansible all -m file -a "path=/home/asaxena/adhoc1 state=touch mode='700'"
+ansible all -m file -a "path=/home/asaxena/adhoc1 state=absent"
+ansible all -m copy -a "src=/tmp/adhoc2 dest=/home/asaxena/adhoc2"
+ansible all -m yum -a "name=telnet state=present"
+ansible all -m yum -a "name=httpd-manual state=present"
+ansible all -m service -a "name=httpd state=started enabled=yes"
+ansible all -m shell -a "systemctl status httpd"
+ansible all -m yum -a "name=httpd state=absent"
+ansible all -m user -a "name=jsmith home=/home/jsmith shell=/bin/bash"
+ansible all -m shell -a "echo 'password123' | passwd jsmith --stdin"
+ansible all -m user -a "name=jsmith group=asaxena"
+ansible all -m user -a "name=jsmith state=absent remove=yes"
+ansible all -m group -a "name=jsmith state=absent"
+ansible all -m setup
+ansible 192.168.84.130 -m shell -a "systemctl reboot"
 
 # disable the deprecation warnings
 cat /etc/ansible/ansible.cfg | grep deprecation_warning
@@ -66,3 +86,8 @@ ansible-galaxy collection install ansible.posix
 
 # Start a playbook at a specific task
 ansible-playbook yamlfile.yaml --start-at-task 'Task name'
+
+# Start a playbook that executes roles (a role is just one play). You can execute multiple roles on different hosts through one playbook
+ansible-playbook httpd-install-through-roles.yaml
+
+
