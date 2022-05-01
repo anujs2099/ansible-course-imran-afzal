@@ -1,0 +1,11 @@
+---
+- name: Install chrony package
+  yum:
+    name: chrony
+    state: present
+
+- name: Start chronyd service
+  service:
+    name: chronyd
+    state: started
+    enabled: yes

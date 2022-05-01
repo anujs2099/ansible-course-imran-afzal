@@ -90,4 +90,22 @@ ansible-playbook yamlfile.yaml --start-at-task 'Task name'
 # Start a playbook that executes roles (a role is just one play). You can execute multiple roles on different hosts through one playbook
 ansible-playbook httpd-install-through-roles.yaml
 
+# Roles can be created based on:
+environments like dev, test, pre-prod, prod
+types of servers like webservers, database servers
+applications like apache, bind, chrony
+
+# pre-written Roles can be downloaded from Ansible Galaxy at galaxy.ansible.com
+<just search for the role in search box>
+ansible-galaxy install <role>
+ansible-galaxy install singleplatform-eng.users
+cat ~/.ansible/roles/singleplatform-eng.users/tasks/main.yml | less
+
+# run specific tag(s) in an ansible playbook
+ansible-playbook -h | grep -i tags
+ansible-playbook httpbytags.yaml --list-tags
+ansible-playbook httpbytags.yaml -t i-httpd
+ansible-playbook httpbytags.yaml --skip-tags=i-httpd
+
+# handlers are tasks that only run when notified to start, reload, restart, and stop services but not if the configuration is unchanged
 

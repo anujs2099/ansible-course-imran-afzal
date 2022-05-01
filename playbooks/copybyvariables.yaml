@@ -1,0 +1,14 @@
+---
+- name: Copy file to remote clients
+  hosts: all
+  vars:
+    srcfile: /home/asaxena/somefile
+
+  tasks:
+  - name: Copying file
+    copy:
+      src: "{{ srcfile }}"
+      dest: /tmp
+      owner: asaxena
+      group: asaxena
+      mode: '0644'
