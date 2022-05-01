@@ -1,0 +1,17 @@
+---
+- name: kill a process
+  hosts: all
+
+  tasks:
+  - name: find the process by process name
+    pids:
+      name: sleep
+    register: pids_of_sleep
+
+  - name: Printing the process IDs obtained
+    debug:
+      msg: "PIDS of sleep:{{ pids_of_sleep.pids|join(',') }}"
+
+  - name: kill the processes
+    shell: "pkill sleep"
+

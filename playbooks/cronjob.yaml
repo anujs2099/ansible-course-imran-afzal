@@ -1,0 +1,25 @@
+---
+- name: Scheduling a cronjob to run every day every 5 minutes
+  hosts: all
+  
+  tasks:
+  - name: Copy shell script to remote vms
+    copy:
+      src: cfile.sh
+      dest: /home/asaxena/cfile.sh
+      owner: asaxena
+      group: asaxena
+      mode: '744'
+
+  - name: Creating a cronjob
+    cron:
+      name: "run cfile.sh every 5 minutes"
+      minute: "*/5"
+      user: root
+      job: "/home/asaxena/cfile.sh"
+
+#  - name: Remove a cronjob
+#    cron:
+#      name: "run cfile.sh every 5 minutes"
+#      state: absent
+

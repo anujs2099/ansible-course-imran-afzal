@@ -1,0 +1,11 @@
+---
+- name: Install bind (DNS) package
+  yum:
+    name: bind
+    state: present
+
+- name: Start named service
+  service:
+    name: named
+    state: started
+    enabled: yes

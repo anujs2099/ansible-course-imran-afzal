@@ -1,0 +1,13 @@
+---
+- name: Add or update user password
+  hosts: all
+
+  tasks:
+  - name: Change user password (not idempotent)
+    user:
+      name: george
+      update_password: always
+      password: "{{ newpassword|password_hash('sha512') }}"
+
+#Run the playbook like below:
+#ansible-playbook changepass.yaml --extra-vars newpassword=abc123

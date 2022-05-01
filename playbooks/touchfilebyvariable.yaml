@@ -1,0 +1,12 @@
+---
+- name: Create a file
+  hosts: localhost
+  vars:
+    file_name: kramer
+  
+  tasks:
+  - name: Create file in /tmp
+    file:
+      path: /tmp/{{ file_name }}.txt
+      state: touch
+      mode: '644'

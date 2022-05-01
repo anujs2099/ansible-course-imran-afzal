@@ -1,0 +1,12 @@
+---
+- name: Copy file from local to remote clients
+  hosts: all
+
+  tasks:
+  - name: Copying file
+    copy:
+      src: /root/some.cfg
+      dest: /tmp/some.cfg 
+      owner: asaxena
+      group: asaxena
+      mode: '0644'

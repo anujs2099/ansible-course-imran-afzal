@@ -1,0 +1,18 @@
+---
+- name: Find a process and kill it
+  hosts: all
+  
+  tasks:
+  - name: Get running processes from remote host (not idempotent)
+    ignore_errors: yes
+    shell: "ps -ef | grep sleep | awk '{print $2}'"
+    register: running_process
+ 
+  - name: Printing the process IDs obtained
+    debug:
+      msg: "PIDS of sleep:{{ running_process.stdout_lines }}"
+
+  - name: Kill running processes (not idempotent)
+    ignore_errors: yes
+    shell: "kill {{ item }}"
+    with_items: "{{ running_process.stdout_lines }}"
