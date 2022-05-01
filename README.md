@@ -19,7 +19,14 @@ ansible-doc yum
 
 # hosts file
 cat /etc/ansible/hosts | less
+
+# list hosts
 ansible-inventory --list
+ansible all --list-hosts
+
+# list all hosts on which a particular playbook will be executed
+ansible-playbook httpd-telnet.yaml --list-hosts
+ansible-playbook helloworld.yaml --list-hosts
 
 # setup the hosts file
 on remote vms
@@ -57,3 +64,5 @@ cat /etc/ansible/ansible.cfg | grep deprecation_warning
 Note: This is not needed on rhel8
 ansible-galaxy collection install ansible.posix
 
+# Start a playbook at a specific task
+ansible-playbook yamlfile.yaml --start-at-task 'Task name'
