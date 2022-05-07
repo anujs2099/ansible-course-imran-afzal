@@ -109,3 +109,4 @@ ansible-playbook httpbytags.yaml --skip-tags=i-httpd
 
 # handlers are tasks that only run when notified to start, reload, restart, and stop services but not if the configuration is unchanged
 
+# when condition is used with facts gathered by the setup module
