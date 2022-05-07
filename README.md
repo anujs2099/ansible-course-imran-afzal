@@ -16,8 +16,11 @@ ansible-playbook helloworld.yaml
 
 # ansible-modules help
 ansible-doc -l | grep -i <search word>
+
 ansible-doc -l | grep -i yum
+
 ansible-doc yum
+
 /EXAMPLE
 
 # hosts file
