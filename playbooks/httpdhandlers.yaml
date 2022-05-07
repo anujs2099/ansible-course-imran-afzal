@@ -1,0 +1,30 @@
+---
+- name: Setup Apache
+  hosts: localhost
+
+  tasks:
+  - name: Ensure apache is at the latest version
+    yum:
+      name: httpd
+      state: latest
+
+  - name: Copy updated apache config file
+    copy:
+      src: /tmp/httpd.conf
+      dest: /etc/httpd/conf/httpd.conf
+    notify:
+    - Restart apache
+
+  - name: Start httpd service if not running
+    service:
+      name: httpd
+      state: started
+      enabled: yes
+
+  handlers:
+  - name: Restart apache
+    service:
+      name: httpd
+      state: restarted
+
+
